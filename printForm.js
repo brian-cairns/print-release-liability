@@ -1,16 +1,16 @@
+let id = ''
+const params = new URLSearchParams(window.location.search)
+for (const [key, value] of params) { id = value; }
+
 const client = sessionStorage.getItem('userName');
-const url = 'https://pffm.azurewebsites.net/'
-const query = {
-    form: 'liabilityRelease',
-    user: client
-}
+const url = `https://pffm.azurewebsites.net/getForms?form=liabilityRelease&id=${id}`
+console.log(id)
 fetch(url, {
     method: "GET",
     headers: {
-        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
     },
-    body: JSON.stringify(query)
+    
 })
   .then(response => response.json())
   .then(data => populatePage(data))    
